@@ -35,8 +35,9 @@ let Tlist_Use_Left_Windo =1             "在左侧窗口中显示taglist窗口
 noremap <F8> :TlistToggle<CR>
 noremap <F6> :!ctags -R<CR>
 
-Bundle 'vim-scripts/tabbar'		"tabbar在标题下显示文件名字
-Plugin 'cscope.vim'			"cscope支持
+Bundle 'vim-scripts/tabbar'             "tabbar在标题下显示文件名字
+Bundle 'chazy/cscope_maps'		"cscope_maps支持
+set nocscopeverbose
 
 Bundle "Lokaltog/vim-powerline"
 Bundle "scrooloose/nerdtree"

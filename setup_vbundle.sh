@@ -4,9 +4,9 @@ echo "Step1: clone vbund into .vim"
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 echo "Step2: clone my vimrc into ~/.vimrc"
-mkdir vimtemp
-git clone git@github.com:fangying/vim.git vimtemp
-cp vimtemp/vimrc_new ~/.vimrc
+git clone https://github.com/fangying/vim.git vimtemp
+mv ~/.vimrc ~/.vimrc.bak
+cp vimtemp/vimrc_new ~/.vimrc -vf
 rm vimtemp -rf
 
 echo "Step3: enable vbunle plugin"

@@ -1,5 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
+set t_Co=256
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -47,12 +48,14 @@ set updatetime=500
 noremap <F5> :!ctags -R<CR>
 
 set nocscopeverbose
-"Plugin 'chazy/cscope_maps'             "cscope_maps支持
+"Plugin 'chazy/cscope_maps'		        "cscope_maps支持
 
 Plugin 'vim-scripts/tabbar'             "tabbar在标题下显示文件名字
 Plugin 'Lokaltog/vim-powerline'
+let g:Powerline_colorscheme='solarized256'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/autopreview'
+Plugin 'wesleyche/Trinity'
 
 Plugin 'jnwhiteh/vim-golang'
 Plugin 'python-mode/python-mode'        " support for python 

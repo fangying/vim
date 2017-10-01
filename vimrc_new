@@ -43,12 +43,12 @@ noremap <F8> :TlistToggle<CR>
 noremap <F7> :NERDTree<CR>
 noremap <F6> :AutoPreviewToggle<CR> 
 noremap <F6> <ESC>:AutoPreviewToggle<CR>
-let g:AutoPreview_enabled =1 
+let g:AutoPreview_enabled =0
 set updatetime=500 
 noremap <F5> :!ctags -R<CR>
 
 set nocscopeverbose
-"Plugin 'chazy/cscope_maps'		        "cscope_maps支持
+Plugin 'chazy/cscope_maps'		        "cscope_maps支持
 
 Plugin 'vim-scripts/tabbar'             "tabbar在标题下显示文件名字
 Plugin 'Lokaltog/vim-powerline'
@@ -63,7 +63,7 @@ Plugin 'pangloss/vim-javascript'
 
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mbriggs/mark.vim'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/DrawIt'
 
 Plugin 'flazz/vim-colorschemes'         " vim colorschemes
@@ -94,3 +94,4 @@ set expandtab
 set hls
 set encoding=utf-8
 set listchars=tab:>-,trail:-
+color desert

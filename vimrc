@@ -1,51 +1,107 @@
-set nocompatible              " be iMproved
-filetype off                  " required!
+" see :h vundle for more details or wiki for FAQ
+syntax on		      " syntax highlight
+set nocompatible              " be iMproved, required
+filetype off                  " required
+set t_Co=256
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
+Plug 'tpope/vim-fugitive'             " git support
+Plug 'vim-scripts/L9'
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 
-" 可以通过以下四种方式指定插件的来源
-" a) 指定Github中vim-scripts仓库中的插件，直接指定插件名称即可，插件明中的空格使用“-”代替。
-Bundle 'L9'
-
-" b) 指定Github中其他用户仓库的插件，使用“用户名/插件名称”的方式指定
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-rails.git'
-
-" c) 指定非Github的Git仓库的插件，需要使用git地址
-" Bundle 'git://git.wincent.com/command-t.git'
-
-" d) 指定本地Git仓库中的插件
-" Bundle 'file:///Users/gmarik/path/to/plugin'
-
-Bundle 'taglist.vim'
-let Tlist_Ctags_Cmd = '/usr/bin/ctags'
-let Tlist_Auto_Open = 0			"启动vim后自动打开taglist窗口
-let Tlist_Show_One_File=1               "不同时显示多个文件的tag，只显示当前文件的
-let Tlist_WinWidt =28                   "设置taglist的宽度
-let Tlist_Exit_OnlyWindow=1             "如果taglist窗口是最后一个窗口，则退出vim
-"let Tlist_Use_Right_Window=1           "在右侧窗口中显示taglist窗口
-let Tlist_Use_Left_Windo =1             "在左侧窗口中显示taglist窗口
-noremap <F8> :TlistToggle<CR>
-noremap <F6> :!ctags -R<CR>
-
-Bundle 'vim-scripts/tabbar'             "tabbar在标题下显示文件名字
-Bundle 'chazy/cscope_maps'		"cscope_maps支持
 set nocscopeverbose
+"Plug 'chazy/cscope_maps'	      " cscope_maps support
 
-Bundle "Lokaltog/vim-powerline"
-Bundle "scrooloose/nerdtree"
-Bundle "jnwhiteh/vim-golang"
+Plug 'vim-scripts/tabbar'
+"Plug 'scrooloose/nerdtree'
+Plug 'vim-scripts/autopreview'
+Plug 'wesleyche/Trinity'
 
-Bundle 'ctrlpvim/ctrlp.vim'
+Plug 'mbriggs/mark.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'vim-scripts/DrawIt'
 
-Bundle "mbriggs/mark.vim"
-Bundle "vim-scripts/DrawIt"
+Plug 'scrooloose/syntastic'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/vim-easy-align'
+Plug 'Lokaltog/vim-easymotion'
 
-filetype plugin indent on     " required!
+" file lookup
+Plug 'vim-scripts/command-t'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
+
+" async
+Plug 'w0rp/ale'                       " grama check
+Plug 'skywind3000/asyncrun.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
+
+" language specific enhance
+Plug 'vim-scripts/c.vim'
+Plug 'vim-scripts/a.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'fatih/vim-go'
+Plug 'jnwhiteh/vim-golang'
+Plug 'pangloss/vim-javascript'
+
+" color
+Plug 'itchyny/lightline.vim'          " status bar
+Plug 'Yggdroot/indentLine'
+Plug 'altercation/vim-colors-solarized'
+Plug 'crusoexia/vim-monokai'
+Plug 'flazz/vim-colorschemes'         " vim colorschemes
+Plug 'rafi/awesome-vim-colorschemes'  " vim colorschemes
+Plug 'lifepillar/vim-solarized8'      " solarized8
+
+" gutentags config
+set tags=./.tags;,.tags
+let $GTAGSLABEL = 'pygments'
+let $GTAGSCONF = '/etc/gtags.conf'
+let g:gutentags_project_root = ['.git','.root','.svn','.hg','.project']
+let g:gutentags_ctags_tagfile = '.tags'
+let g:gutentags_modules = []
+if executable('gtags-cscope') && executable('gtags')
+	let g:gutentags_modules += ['gtags_cscope']
+endif
+if executable('ctags')
+	let g:gutentags_modules += ['ctags']
+endif
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+let g:gutentags_ctags_extra_args = []
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+let g:gutentags_auto_add_gtags_cscope = 1
+let g:gutentags_plus_switch = 1
+let g:asyncrun_bell = 1
+let g:gutentags_define_advanced_commands = 1
+
+" All of your Plugs must be added before the following line
+call plug#end()              " required
+
+
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+
+" Put your non-Plug stuff after this line
+set tabstop=8
+set softtabstop=8
+set shiftwidth=4
+"set expandtab
+set hls
+set encoding=utf-8
+set listchars=tab:>-,trail:-
+
+" set F3, F4 to find function and symbol
+nnoremap <F3> :cs find g
+nnoremap <F4> :cs find s
+color desert

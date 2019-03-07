@@ -9,7 +9,7 @@ set t_Co=256
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-fugitive'             " git support
+"Plug 'tpope/vim-fugitive'             " git support
 Plug 'vim-scripts/L9'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'nvie/vim-togglemouse'
@@ -32,8 +32,9 @@ Plug 'Lokaltog/vim-easymotion'
 
 " file lookup
 Plug 'vim-scripts/command-t'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'tacahiroy/ctrlp-funky'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'vim-scripts/genutils'
 
 " async
@@ -60,6 +61,7 @@ Plug 'flazz/vim-colorschemes'         " vim colorschemes
 Plug 'rafi/awesome-vim-colorschemes'  " vim colorschemes
 Plug 'lifepillar/vim-solarized8'      " solarized8
 
+Plug 'vim-scripts/gtags.vim'
 " gutentags config
 set cscopeprg='gtags-cscope'
 set tags=./.tags;.tags
@@ -80,18 +82,21 @@ let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
-let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']	"use universal_ctags
 let g:gutentags_auto_add_gtags_cscope = 0
 let g:gutentags_plus_switch = 1
-let g:asyncrun_bell = 1
 let g:gutentags_define_advanced_commands = 1
+let g:gutentags_generate_on_empty_buffer = 1
+let g:asyncrun_bell = 1
 
-Plug 'skywind3000/vim-preview'
-"P 预览 大p关闭
+
+Plug 'skywind3000/vim-preview'			"P 预览 大p关闭
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
-noremap <Leader>u :PreviewScroll -1<cr> 	" 往上滚动预览窗口
-noremap <leader>d :PreviewScroll +1<cr> 	" 往下滚动预览窗口
+noremap <m-u> :PreviewScroll -1<cr>
+noremap <m-d> :PreviewScroll +1<cr>
+inoremap <m-u> <c-\><c-o>:PreviewScroll -1<cr>
+inoremap <m-d> <c-\><c-o>:PreviewScroll +1<cr>
 
 noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
 noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
@@ -103,14 +108,37 @@ noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
 noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
 noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
 
+" leaderF
+let g:Lf_ShortcutF = '<c-p>'
+noremap <Leader>ff :LeaderfFunction<cr>
+noremap <Leader>fb :LeaderfBuffer<cr>
+noremap <Leader>ft :LeaderfTag<cr>
+noremap <Leader>fm :LeaderfMru<cr>
+noremap <Leader>fl :LeaderfLine<cr>
+
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+
+let g:Lf_NormalMap = {
+	\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+	\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+	\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+	\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+	\ }
+
 " All of your Plugs must be added before the following line
 call plug#end()              " required
 
-
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-
 " Put your non-Plug stuff after this line
 set tabstop=8
 set softtabstop=8
@@ -123,4 +151,5 @@ set listchars=tab:>-,trail:-
 " set F3, F4 to find function and symbol
 nnoremap <F3> :GscopeFind gs 
 nnoremap <F4> :GscopeFind gg 
-color desert
+
+colorscheme desert

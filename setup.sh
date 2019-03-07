@@ -1,7 +1,8 @@
 #!/bin/sh
 
 echo "Step1: clone Plug.vim into .vim"
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+mkdir -pv ~/.vim/autoload
+wget --no-check-certificate https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -O ~/.vim/autoload/plug.vim
 
 # configure vim with
 # ./configure --with-features=huge --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu/

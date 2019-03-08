@@ -47,6 +47,7 @@ Plug 'skywind3000/vim-preview'
 " language specific enhance
 Plug 'vim-scripts/c.vim'
 Plug 'vim-scripts/a.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'fatih/vim-go'
 Plug 'jnwhiteh/vim-golang'
@@ -148,8 +149,8 @@ set hls
 set encoding=utf-8
 set listchars=tab:>-,trail:-
 
-" set F3, F4 to find function and symbol
-nnoremap <F3> :GscopeFind gs 
-nnoremap <F4> :GscopeFind gg 
+" set F5, F6 to find function and symbol
+nnoremap <F5> :GscopeFind gs 
+nnoremap <F6> :GscopeFind gg 
 
 colorscheme desert

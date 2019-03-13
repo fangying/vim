@@ -1,50 +1,38 @@
-" see :h vundle for more details or wiki for FAQ
 syntax on		      " syntax highlight
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set t_Co=256
 
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-"Plug 'tpope/vim-fugitive'             " git support
-Plug 'vim-scripts/L9'
-Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plug 'nvie/vim-togglemouse'
-Plug 'tpope/vim-unimpaired'
-Plug 'vim-scripts/Smart-Tabs'
+# utils and navigators
+Plug 'vim-scripts/L9'                 " util lib
+Plug 'tpope/vim-fugitive'             " git support
 
+Plug 'mbriggs/mark.vim'               " multiple mark highlight
+Plug 'nvie/vim-togglemouse'           " mouse toggle
+Plug 'tpope/vim-unimpaired'           " branch pair
+Plug 'vim-scripts/Smart-Tabs'  
 Plug 'vim-scripts/tabbar'
 Plug 'vim-scripts/autopreview'
 Plug 'wesleyche/Trinity'
-
-Plug 'mbriggs/mark.vim'
-Plug 'Valloric/YouCompleteMe'
-Plug 'vim-scripts/DrawIt'
-
-Plug 'scrooloose/syntastic'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'tpope/vim-surround'
+Plug 'scrooloose/syntastic'
 Plug 'junegunn/vim-easy-align'
 Plug 'Lokaltog/vim-easymotion'
+Plug 'vim-scripts/DrawIt'
 
 " file lookup
 Plug 'vim-scripts/command-t'
-"Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'tacahiroy/ctrlp-funky'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'vim-scripts/genutils'
 
-" async
-Plug 'w0rp/ale'                       " grama check
-Plug 'skywind3000/asyncrun.vim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus'
-Plug 'skywind3000/vim-preview'
+# YCM support
+Plug 'Valloric/YouCompleteMe'
 
-" language specific enhance
+# languate support
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'vim-scripts/c.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'rust-lang/rust.vim'
@@ -53,7 +41,7 @@ Plug 'fatih/vim-go'
 Plug 'jnwhiteh/vim-golang'
 Plug 'pangloss/vim-javascript'
 
-" color
+# color
 Plug 'itchyny/lightline.vim'          " status bar
 Plug 'Yggdroot/indentLine'
 Plug 'altercation/vim-colors-solarized'
@@ -61,6 +49,13 @@ Plug 'crusoexia/vim-monokai'
 Plug 'flazz/vim-colorschemes'         " vim colorschemes
 Plug 'rafi/awesome-vim-colorschemes'  " vim colorschemes
 Plug 'lifepillar/vim-solarized8'      " solarized8
+
+" async
+Plug 'w0rp/ale'                       " grama check
+Plug 'skywind3000/asyncrun.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
+Plug 'skywind3000/vim-preview'
 
 Plug 'vim-scripts/gtags.vim'
 " gutentags config
@@ -89,7 +84,6 @@ let g:gutentags_plus_switch = 1
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_generate_on_empty_buffer = 1
 let g:asyncrun_bell = 1
-
 
 Plug 'skywind3000/vim-preview'			"P 预览 大p关闭
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
@@ -135,8 +129,7 @@ let g:Lf_NormalMap = {
 	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
 	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
 	\ }
-
-" All of your Plugs must be added before the following line
+            
 call plug#end()              " required
 
 filetype plugin indent on    " required
@@ -152,5 +145,4 @@ set listchars=tab:>-,trail:-
 " set F5, F6 to find function and symbol
 nnoremap <F5> :GscopeFind gs 
 nnoremap <F6> :GscopeFind gg 
-
-colorscheme desert
+nnoremap <F4> :ccl <CR>

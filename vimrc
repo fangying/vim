@@ -5,14 +5,14 @@ set t_Co=256
 
 call plug#begin('~/.vim/plugged')
 
-# utils and navigators
+" utils and navigators
 Plug 'vim-scripts/L9'                 " util lib
 Plug 'tpope/vim-fugitive'             " git support
 
 Plug 'mbriggs/mark.vim'               " multiple mark highlight
 Plug 'nvie/vim-togglemouse'           " mouse toggle
 Plug 'tpope/vim-unimpaired'           " branch pair
-Plug 'vim-scripts/Smart-Tabs'  
+Plug 'vim-scripts/Smart-Tabs'
 Plug 'vim-scripts/tabbar'
 Plug 'vim-scripts/autopreview'
 Plug 'wesleyche/Trinity'
@@ -28,12 +28,12 @@ Plug 'vim-scripts/command-t'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'vim-scripts/genutils'
 
-# YCM support
+" YCM support
 Plug 'Valloric/YouCompleteMe'
 
-# languate support
+" languate support
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plug 'vim-scripts/c.vim'
+" Plug 'vim-scripts/c.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
@@ -41,7 +41,8 @@ Plug 'fatih/vim-go'
 Plug 'jnwhiteh/vim-golang'
 Plug 'pangloss/vim-javascript'
 
-# color
+" color
+Plug 'sunuslee/vim-plugin-random-colorscheme-picker'
 Plug 'itchyny/lightline.vim'          " status bar
 Plug 'Yggdroot/indentLine'
 Plug 'altercation/vim-colors-solarized'

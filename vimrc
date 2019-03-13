@@ -1,6 +1,7 @@
 syntax on		      " syntax highlight
 set nocompatible              " be iMproved, required
 filetype off                  " required
+set backspace=indent,eol,start
 set t_Co=256
 
 call plug#begin('~/.vim/plugged')

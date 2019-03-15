@@ -87,6 +87,7 @@ let g:gutentags_auto_add_gtags_cscope = 0
 let g:gutentags_plus_switch = 1
 let g:asyncrun_bell = 1
 let g:gutentags_define_advanced_commands = 1
+let g:gutentags_generate_on_empty_buffer = 1	" open database
 
 Plug 'skywind3000/vim-preview'
 "P 预览 大p关闭

@@ -2,6 +2,7 @@ syntax on		      " syntax highlight
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set t_Co=256
+set backspace=indent,eol,start
 
 call plug#begin('~/.vim/plugged')
 
@@ -104,6 +105,33 @@ noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
 noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
 noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
 
+" LeaderF
+let g:Lf_ShortcutF = '<c-p>'
+noremap <Leader>ff :LeaderfFunction<cr>
+noremap <Leader>fb :LeaderfBuffer<cr>
+noremap <Leader>ft :LeaderfTag<cr>
+noremap <Leader>fm :LeaderfMru<cr>
+noremap <Leader>fl :LeaderfLine<cr>
+
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+
+let g:Lf_NormalMap = {
+	\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+	\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+	\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+	\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+	\ }
+ 
 " All of your Plugs must be added before the following line
 call plug#end()              " required
 

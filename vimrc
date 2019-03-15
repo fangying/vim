@@ -153,4 +153,6 @@ set listchars=tab:>-,trail:-
 nnoremap <F5> :GscopeFind gs 
 nnoremap <F6> :GscopeFind gg 
 nnoremap <F4> :ccl <CR>
-color desert
+
+" color desert
+color Tomorrow-Night-Bright

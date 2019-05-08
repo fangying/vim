@@ -28,14 +28,14 @@ Plug 'Yggdroot/indentLine'
 Plug 'itchyny/lightline.vim'
 
 " YCM
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 
 " file lookup
 Plug 'vim-scripts/command-t'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 " async grama check
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 Plug 'skywind3000/asyncrun.vim'
 
 " language specific enhance

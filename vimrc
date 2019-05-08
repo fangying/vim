@@ -166,7 +166,7 @@ set listchars=tab:>-,trail:-
 
 " set F5, F6 to find function and symbol
 nnoremap <F5> :GscopeFind gs 
-nnoremap <F6> :GscopeFind gg 
+nnoremap <F9> :GscopeFind gg 
 nnoremap <F4> :ccl <CR>
 
 " color desert

@@ -89,6 +89,8 @@ let g:asyncrun_bell = 1
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_generate_on_empty_buffer = 1	" open database
 
+"let g:gutentags_trace = 1
+
 Plug 'skywind3000/vim-preview'
 "P 预览 大p关闭
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>

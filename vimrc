@@ -1,3 +1,7 @@
+if exists('&colorcolumn')
+    set colorcolumn=80
+endif
+set paste
 syntax on		      " syntax highlight
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -48,7 +52,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
 
 " color
-Plug 'sunuslee/vim-plugin-random-colorscheme-picker'
+"Plug 'sunuslee/vim-plugin-random-colorscheme-picker'
 Plug 'altercation/vim-colors-solarized'
 Plug 'crusoexia/vim-monokai'
 Plug 'flazz/vim-colorschemes'         " vim colorschemes
@@ -134,7 +138,6 @@ let g:Lf_NormalMap = {
 	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
 	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
 	\ }
-	
 " latex support
 Plug 'lervag/vimtex'
 let g:tex_flavor='latex'

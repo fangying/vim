@@ -2,6 +2,7 @@ if exists('&colorcolumn')
     set colorcolumn=80
 endif
 set paste
+set incsearch
 syntax on		      " syntax highlight
 set nocompatible              " be iMproved, required
 filetype off                  " required

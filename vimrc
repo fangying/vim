@@ -174,6 +174,8 @@ set listchars=tab:>-,trail:-
 nnoremap <F5> :GscopeFind gs 
 nnoremap <F9> :GscopeFind gg 
 nnoremap <F4> :ccl <CR>
+nnoremap <F2> :let g:gutentags_trace = 1 <CR>
+nnoremap <F3> :let g:gutentags_trace = 0 <CR>
 
 " color desert
 color Tomorrow-Night-Bright

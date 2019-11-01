@@ -2,8 +2,9 @@ if exists('&colorcolumn')
     set colorcolumn=80
 endif
 set paste
-set incsearch
-syntax on		      " syntax highlight
+syntax on                     " syntax highlight
+set incsearch                 " real time search
+set background=dark
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set t_Co=256
@@ -33,7 +34,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'itchyny/lightline.vim'
 
 " YCM
-"Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer',  'for': ['c', 'cpp', 'rust'] }
 
 " file lookup
 Plug 'vim-scripts/command-t'
@@ -44,8 +45,8 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'skywind3000/asyncrun.vim'
 
 " language specific enhance
-Plug 'vim-scripts/c.vim'
-Plug 'vim-scripts/a.vim'
+"Plug 'vim-scripts/c.vim'
+"Plug 'vim-scripts/a.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'fatih/vim-go'
 Plug 'jnwhiteh/vim-golang'
@@ -75,11 +76,11 @@ let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
 let g:gutentags_project_root = ['.git','.root','.svn','.hg','.project']
 let g:gutentags_ctags_tagfile = '.tags'
 let g:gutentags_modules = []
-if executable('gtags-cscope') && executable('gtags')
-	let g:gutentags_modules += ['gtags_cscope']
-endif
 if executable('ctags')
-	let g:gutentags_modules += ['ctags']
+        let g:gutentags_modules += ['ctags']
+endif
+if executable('gtags-cscope') && executable('gtags')
+        let g:gutentags_modules += ['gtags_cscope']
 endif
 let g:gutentags_cache_dir = expand('~/.cache/tags')
 let g:gutentags_ctags_extra_args = []
@@ -92,7 +93,7 @@ let g:gutentags_auto_add_gtags_cscope = 0
 let g:gutentags_plus_switch = 1
 let g:asyncrun_bell = 1
 let g:gutentags_define_advanced_commands = 1
-let g:gutentags_generate_on_empty_buffer = 1	" open database
+let g:gutentags_generate_on_empty_buffer = 1    " open database
 
 "let g:gutentags_trace = 1
 
@@ -100,8 +101,8 @@ Plug 'skywind3000/vim-preview'
 "P 预览 大p关闭
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
-noremap <Leader>u :PreviewScroll -1<cr> 	" 往上滚动预览窗口
-noremap <leader>d :PreviewScroll +1<cr> 	" 往下滚动预览窗口
+noremap <Leader>u :PreviewScroll -1<cr>         " 往上滚动预览窗口
+noremap <leader>d :PreviewScroll +1<cr>         " 往下滚动预览窗口
 
 noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
 noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
@@ -132,13 +133,13 @@ let g:Lf_StlColorscheme = 'powerline'
 let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 
 let g:Lf_NormalMap = {
-	\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-	\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
-	\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
-	\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
-	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
-	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
-	\ }
+        \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+        \ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+        \ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+        \ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+        \ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+        \ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+        \ }
 " latex support
 Plug 'lervag/vimtex'
 let g:tex_flavor='latex'
@@ -171,11 +172,11 @@ set encoding=utf-8
 set listchars=tab:>-,trail:-
 
 " set F5, F6 to find function and symbol
-nnoremap <F5> :GscopeFind gs 
-nnoremap <F9> :GscopeFind gg 
+nnoremap <F5> :GscopeFind gs
+nnoremap <F9> :GscopeFind gg
 nnoremap <F4> :ccl <CR>
 nnoremap <F2> :let g:gutentags_trace = 1 <CR>
 nnoremap <F3> :let g:gutentags_trace = 0 <CR>
 
-" color desert
-color Tomorrow-Night-Bright
+color codeblocks_dark
+"color Tomorrow-Night-Bright

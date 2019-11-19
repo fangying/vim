@@ -2,6 +2,7 @@ if exists('&colorcolumn')
     set colorcolumn=80
 endif
 set paste
+set cursorline
 syntax on                     " syntax highlight
 set incsearch                 " real time search
 set background=dark
@@ -149,10 +150,11 @@ set conceallevel=1
 let g:tex_conceal='abdmg'
 
 " UltiSnips
-Plug 'sirver/ultisnips'
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+Plug 'SirVer/ultisnips'
+" Trigger configuration. Do not use <tab> if you use YouCompleteMe.
+let g:UltiSnipsExpandTrigger = '<c-tab>'
+let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
 " All of your Plugs must be added before the following line
 call plug#end()              " required
@@ -178,5 +180,7 @@ nnoremap <F4> :ccl <CR>
 nnoremap <F2> :let g:gutentags_trace = 1 <CR>
 nnoremap <F3> :let g:gutentags_trace = 0 <CR>
 
-color codeblocks_dark
+"color codeblocks_dark
 "color Tomorrow-Night-Bright
+"color github
+color desertEx

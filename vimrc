@@ -183,4 +183,6 @@ nnoremap <F3> :let g:gutentags_trace = 0 <CR>
 "color codeblocks_dark
 "color Tomorrow-Night-Bright
 "color github
+"color frood
 color desertEx
+color wellsokai

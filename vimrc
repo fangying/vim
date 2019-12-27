@@ -186,3 +186,4 @@ nnoremap <F3> :let g:gutentags_trace = 0 <CR>
 "color frood
 color desertEx
 color wellsokai
+color flattown

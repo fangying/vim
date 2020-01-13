@@ -1,3 +1,4 @@
+
 if exists('&colorcolumn')
     set colorcolumn=80
 endif
@@ -55,7 +56,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
 
 " color
-"Plug 'sunuslee/vim-plugin-random-colorscheme-picker'
+Plug 'sunuslee/vim-plugin-random-colorscheme-picker'
 Plug 'altercation/vim-colors-solarized'
 Plug 'crusoexia/vim-monokai'
 Plug 'flazz/vim-colorschemes'         " vim colorschemes
@@ -83,7 +84,7 @@ endif
 if executable('gtags-cscope') && executable('gtags')
         let g:gutentags_modules += ['gtags_cscope']
 endif
-let g:gutentags_cache_dir = expand('~/.cache/tags')
+let g:gutentags_cache_dir = expand('/mnt/sdc/fangying/.cache/tags')
 let g:gutentags_ctags_extra_args = []
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
@@ -150,11 +151,12 @@ set conceallevel=1
 let g:tex_conceal='abdmg'
 
 " UltiSnips
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 " Trigger configuration. Do not use <tab> if you use YouCompleteMe.
-let g:UltiSnipsExpandTrigger = '<c-tab>'
-let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+"jlet g:UltiSnipsUsePythonVersion = 2
+"let g:UltiSnipsExpandTrigger = '<c-tab>'
+"let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+"let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
 " All of your Plugs must be added before the following line
 call plug#end()              " required
@@ -179,11 +181,12 @@ nnoremap <F9> :GscopeFind gg
 nnoremap <F4> :ccl <CR>
 nnoremap <F2> :let g:gutentags_trace = 1 <CR>
 nnoremap <F3> :let g:gutentags_trace = 0 <CR>
+nnoremap <F7> :GutentagsUpdate <CR>
 
 "color codeblocks_dark
 "color Tomorrow-Night-Bright
 "color github
-"color frood
 color desertEx
 color wellsokai
+color monokain
 color flattown

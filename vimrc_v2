@@ -137,7 +137,7 @@ highlight Lf_hl_matchRefine  gui=bold guifg=Magenta cterm=bold ctermfg=green
 set paste
 set cursorline
 set incsearch                 " real time search
-set background=dark
+"set background=dark
 set nocompatible              " be iMproved, required
 set backspace=indent,eol,start
 set listchars=tab:>-,trail:-

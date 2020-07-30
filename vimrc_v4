@@ -7,6 +7,7 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
 Plug 'Yggdroot/indentLine'
+Plug 'scrooloose/nerdtree'
 
 " utils
 Plug 'vim-scripts/DrawIt'
@@ -122,6 +123,10 @@ nnoremap <F5> :GscopeFind gs
 nnoremap <F6> :GscopeFind gg 
 nnoremap <F4> :ccl <CR>
 nnoremap <F7> :GutentagsUpdate <CR>
+
+" set F3 for NERDTree
+map <F3> :NERDTreeMirror<CR>
+map <F3> :NERDTreeToggle<CR>
 
 " move cursor in insert mode
 inoremap <C-h> <Left>

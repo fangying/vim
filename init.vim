@@ -101,8 +101,8 @@ noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
 
 
 " set F5, F6 to find function and symbol
-nnoremap <F5> :GscopeFind gs
-nnoremap <F6> :GscopeFind gg
+nnoremap <F5> :GscopeFind gs 
+nnoremap <F6> :GscopeFind gg 
 nnoremap <F4> :ccl <CR>
 nnoremap <F7> :GutentagsUpdate <CR>
 

@@ -15,13 +15,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/L9'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'wesleyche/Trinity'
-Plug 'vim-scripts/tabbar'
-Plug 'vim-scripts/Smart-Tabs'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'nvie/vim-togglemouse'
 Plug 'tpope/vim-unimpaired'
 Plug 'scrooloose/syntastic'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'itchyny/lightline.vim'
 
 " coc.nvim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -33,7 +32,7 @@ Plug 'jnwhiteh/vim-golang'
 Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
 
-" color
+" color themes
 "Plug 'sunuslee/vim-plugin-random-colorscheme-picker'
 Plug 'altercation/vim-colors-solarized'
 Plug 'crusoexia/vim-monokai'
@@ -45,7 +44,7 @@ Plug 'rainglow/vim'
 call plug#end()
 
 " ========= coc.nvim config begin ==============
-set updatetime=300
+set updatetime=100
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -116,8 +115,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>cl <Plug>(coc-format-selected)
+nmap <leader>cl <Plug>(coc-format-selected)
 
 augroup mygroup
 autocmd!
@@ -195,6 +194,23 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " ========= coc.nvim config end ==============
+
+" ariline config
+set laststatus=2  "永远显示状态栏
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='moloai'  " murmur配色不错
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '▶'
+let g:airline_left_alt_sep = '❯'
+let g:airline_right_sep = '◀'
+let g:airline_right_alt_sep = '❮'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+nmap <tab> :bn<cr>
 
 " Put your non-Plug stuff after this line
 syntax on

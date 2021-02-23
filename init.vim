@@ -41,7 +41,81 @@ Plug 'rafi/awesome-vim-colorschemes'  " vim colorschemes
 Plug 'lifepillar/vim-solarized8'      " solarized8
 Plug 'rainglow/vim'
 
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
+
 call plug#end()
+
+" ====== gutentags config begin
+" no clear screen when exit vim
+set t_ti= t_te=
+let g:gutentags_add_default_project_roots = 0
+" gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归 "
+let g:gutentags_project_root = ['.root', '.git', '.svn', '.hg', '.project']
+" 所生成的数据文件的名称
+let g:gutentags_ctags_tagfile = '.tags'
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+
+if isdirectory("kernel/") && isdirectory("mm/")
+    let g:gutentags_file_list_command = 'find arch/arm* arch/riscv arch/x86 block crypto drivers fs include init ipc kernel lib mm net security sound virt'
+endif
+
+
+set tags=./.tags;.tags
+let g:gutentags_ctags_tagfile = '.tags'
+let g:gutentags_modules = []
+set cscopeprg='gtags-cscope'
+let $GTAGSLABEL = 'native'
+let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
+if executable('ctags')
+    let g:gutentags_modules += ['ctags']
+endif
+if executable('gtags-cscope') && executable('gtags')
+    let g:gutentags_modules += ['gtags_cscope']
+endif
+
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+let g:gutentags_auto_add_gtags_cscope = 0
+let g:gutentags_plus_switch = 1
+let g:asyncrun_bell = 1
+let g:gutentags_define_advanced_commands = 1
+let g:gutentags_generate_on_empty_buffer = 1    " open database
+
+noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
+"noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
+"noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
+"noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
+"noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+"noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+"noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
+"noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
+
+
+" set F5, F6 to find function and symbol
+nnoremap <F5> :GscopeFind gs
+nnoremap <F6> :GscopeFind gg
+nnoremap <F4> :ccl <CR>
+nnoremap <F7> :GutentagsUpdate <CR>
+
+" set F3 for NERDTree
+map <F3> :NERDTreeMirror<CR>
+map <F3> :NERDTreeToggle<CR>
+
+" move cursor in insert mode
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+" ====== gutentags config end
 
 " ========= coc.nvim config begin ==============
 set updatetime=100
@@ -200,7 +274,7 @@ set laststatus=2  "永远显示状态栏
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='moloai'  " murmur配色不错
+let g:airline_theme = 'molokai'
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif

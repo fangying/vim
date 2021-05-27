@@ -18,6 +18,7 @@ Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'wesleyche/Trinity'
 Plug 'vim-scripts/tabbar'
 Plug 'vim-scripts/Smart-Tabs'
+Plug 'vim-scripts/taglist.vim'
 Plug 'nvie/vim-togglemouse'
 Plug 'tpope/vim-unimpaired'
 Plug 'scrooloose/syntastic'
@@ -42,7 +43,6 @@ Plug 'crusoexia/vim-monokai'
 Plug 'flazz/vim-colorschemes'         " vim colorschemes
 Plug 'rafi/awesome-vim-colorschemes'  " vim colorschemes
 Plug 'lifepillar/vim-solarized8'      " solarized8
-Plug 'rainglow/vim'
 
 " gtags and gnu global support
 Plug 'vim-scripts/gtags.vim'
@@ -51,7 +51,6 @@ Plug 'vim-scripts/genutils'
 
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
-"let g:gutentags_trace = 1
 
 Plug 'skywind3000/vim-preview'
 "P 预览 大p关闭
@@ -98,8 +97,8 @@ if executable('gtags-cscope') && executable('gtags')
         let g:gutentags_modules += ['gtags_cscope']
 endif
 
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
@@ -108,6 +107,8 @@ let g:gutentags_plus_switch = 1
 let g:asyncrun_bell = 1
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_generate_on_empty_buffer = 1    " open database
+
+"let g:gutentags_trace = 1
 
 noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
 noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
@@ -129,6 +130,7 @@ nnoremap <F7> :GutentagsUpdate <CR>
 " set F3 for NERDTree
 map <F3> :NERDTreeMirror<CR>
 map <F3> :NERDTreeToggle<CR>
+let g:NERDTreeWinSize = 32
 
 " move cursor in insert mode
 inoremap <C-h> <Left>
@@ -149,6 +151,14 @@ highlight Lf_hl_match3 gui=bold guifg=Blue cterm=bold ctermfg=green
 highlight Lf_hl_match4 gui=bold guifg=Blue cterm=bold ctermfg=green
 highlight Lf_hl_matchRefine  gui=bold guifg=Magenta cterm=bold ctermfg=green
 
+" taglist.vim
+let Tlist_Auto_Open = 1
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_Use_Right_Window =1
+let Tlist_WinWidth = 32
+noremap <F8> :TlistToggle<CR>
+
+
 " Put your non-Plug stuff after this line
 set t_Co=256
 set paste
@@ -166,14 +176,12 @@ set hls
 "set expandtab
 set encoding=utf-8
 
-set tabstop=8
-set softtabstop=8
+set tabstop=4
+set softtabstop=4
 set shiftwidth=4
-set background=dark
+set background=light
 set laststatus=2
 "color flattown
 "color one
-"color github
-"color one
+"color default
 color molokai
-set nu

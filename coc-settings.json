@@ -1,25 +1,25 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [
-    "rust"
+	"rust"
   ],
   "diagnostic.errorSign": "✘",
   "diagnostic.infoSign": "i",
   "languageserver": {
-    "rust": {
-      "command": "rust-analyzer",
-      "filetypes": ["rust"],
-      "rootPatterns": ["Cargo.toml"]
-    },
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
-      "initializationOptions": {
-        " cache": {
-          "directory": "/tmp/ccls"
-        }
+      "rust": {
+		"command": "rust-analyzer",
+		"filetypes": ["rust"],
+		"rootPatterns": ["Cargo.toml"]
+      },
+      "ccls": {
+		"command": "ccls",
+		"filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+		"rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+		"initializationOptions": {
+			"cache": {
+			"directory": "/home/fang/.cache/ccls"
+	      }
+		}
       }
-    }
   },
   "rust-analyzer.server.path": "~/.cargo/bin/rust-analyzer",
   "rust-analyzer.diagnostics.enable": true,

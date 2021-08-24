@@ -1,23 +1,28 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus'
-
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'Yggdroot/LeaderF', { 'do': '.\install.sh' }
 Plug 'Lokaltog/vim-easymotion'
 Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-surround'
+Plug 'Yggdroot/indentLine'
+Plug 'scrooloose/nerdtree'
 
+" utils
 Plug 'vim-scripts/DrawIt'
 Plug 'mbriggs/mark.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/L9'
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plug 'wesleyche/Trinity'
+Plug 'vim-scripts/tabbar'
+Plug 'vim-scripts/Smart-Tabs'
+Plug 'nvie/vim-togglemouse'
 Plug 'tpope/vim-unimpaired'
-Plug 'Yggdroot/indentLine'
-
-" YCM
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer',  'for': ['c', 'cpp', 'rust'] }
-let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
-
+Plug 'scrooloose/syntastic'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'itchyny/lightline.vim'
 
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'fatih/vim-go'
@@ -37,6 +42,9 @@ Plug 'lifepillar/vim-solarized8'      " solarized8
 Plug 'vim-scripts/gtags.vim'
 Plug 'vim-scripts/autopreview'
 Plug 'vim-scripts/genutils'
+
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
 
 Plug 'skywind3000/vim-preview'
 "P 预览 大p关闭
@@ -83,8 +91,8 @@ if executable('gtags-cscope') && executable('gtags')
         let g:gutentags_modules += ['gtags_cscope']
 endif
 
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
@@ -93,6 +101,8 @@ let g:gutentags_plus_switch = 1
 let g:asyncrun_bell = 1
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_generate_on_empty_buffer = 1    " open database
+
+"let g:gutentags_trace = 1
 
 noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
 noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
@@ -106,12 +116,14 @@ noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
 
 
 " set F5, F6 to find function and symbol
-nnoremap <F5> :GscopeFind gs
-nnoremap <F9> :GscopeFind gg
+nnoremap <F5> :GscopeFind gs 
+nnoremap <F6> :GscopeFind gg 
 nnoremap <F4> :ccl <CR>
-nnoremap <F2> :let g:gutentags_trace = 1 <CR>
-nnoremap <F3> :let g:gutentags_trace = 0 <CR>
 nnoremap <F7> :GutentagsUpdate <CR>
+
+" set F3 for NERDTree
+map <F3> :NERDTreeMirror<CR>
+map <F3> :NERDTreeToggle<CR>
 
 " move cursor in insert mode
 inoremap <C-h> <Left>
@@ -119,7 +131,7 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 
-" LeaderF configuration 
+" LeaderF configuration
 " search word under cursor, the pattern is treated as regex, and enter normal
 " mode directly
 noremap <C-P> :<C-U><C-R>=printf("Leaderf rg -e %s ", expand("<cword>"))<CR>
@@ -132,12 +144,12 @@ highlight Lf_hl_match3 gui=bold guifg=Blue cterm=bold ctermfg=green
 highlight Lf_hl_match4 gui=bold guifg=Blue cterm=bold ctermfg=green
 highlight Lf_hl_matchRefine  gui=bold guifg=Magenta cterm=bold ctermfg=green
 
-" Customize
- set t_Co=256
+" Put your non-Plug stuff after this line
+set t_Co=256
 set paste
 set cursorline
 set incsearch                 " real time search
-set background=dark
+"set background=dark
 set nocompatible              " be iMproved, required
 set backspace=indent,eol,start
 set listchars=tab:>-,trail:-
@@ -145,12 +157,15 @@ if exists('&colorcolumn')
     set colorcolumn=80
 endif
 set hls
-"" set expandtab
+"set mouse=a    " scroll in vim
+"set expandtab
 set encoding=utf-8
 
-" Put your non-Plug stuff after this line
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-
-color flattown
+set background=light
+set laststatus=2
+"color flattown
+"color one
+color molokai

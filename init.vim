@@ -62,7 +62,7 @@ set cmdheight=2
 set laststatus=2
 set background=dark
 set colorcolumn=80
-set termguicolors
+"set termguicolors
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 syntax on
 filetype plugin indent on

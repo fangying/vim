@@ -14,6 +14,9 @@ Plug 'liuchengxu/vista.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" easymotion
+Plug 'easymotion/vim-easymotion'
+
 " advanced terminal
 Plug 'skywind3000/vim-terminal-help'
 

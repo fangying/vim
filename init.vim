@@ -35,6 +35,10 @@ Plug 'bronson/vim-trailing-whitespace'
 " multipule line comment
 Plug 'scrooloose/nerdcommenter'
 
+" nerdtree
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
 " color scheme
 Plug 'liuchengxu/space-vim-theme'
 Plug 'altercation/vim-colors-solarized'
@@ -52,6 +56,7 @@ call plug#end()
 
 " basic
 set nocompatible
+set paste
 set softtabstop=4
 set shiftwidth=4
 set tabstop=8
@@ -73,7 +78,6 @@ set colorcolumn=80
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 syntax on
 filetype plugin indent on
-" Remap leader to 'space'
 let mapleader="\<space>"
 
 " use [<Space> ]<Space> to insert blank line
@@ -89,7 +93,7 @@ nnoremap <silent> [<Space> :<C-U>call <SID>BlankUp(1)<CR>
 nnoremap <silent> ]<Space> :<C-U>call <SID>BlankDown(1)<CR>
 
 
-" Plugins
+" Plugins Customized
 
 " coc.vim
 set updatetime=300
@@ -191,5 +195,22 @@ let g:NERDTrimTrailingWhitespace = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
+" nerdtree
+" autocmd vimenter * NERDTree  " Auto launch nerdtree
+let g:NERDTreeWinSize = 25 " setting nerdtree window size
+let NERDTreeShowBookmarks=1  " show bookmarks when nerdtree is enabled
+" autocmd vimenter * if !argc()|NERDTree|endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+let NERDTreeIgnore = ['\.pyc$']  " filter '.pyc' file
+let g:NERDTreeShowLineNumbers=0 " show line number
+let g:NERDTreeHidden=0     " do not show hidden file
+""Making it prettier
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+nnoremap <F3> :NERDTreeToggle<CR> " Shortcut for nerdtree
+
+" space-vim-theme
 colorscheme space_vim_theme
 hi Comment guifg=#5C6370 ctermfg=59

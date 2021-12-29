@@ -10,12 +10,12 @@ Plug 'vn-ki/coc-clap'
 " symbol search & viewer
 Plug 'liuchengxu/vista.vim'
 
+" easymotion
+Plug 'easymotion/vim-easymotion'
+
 " status bar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
-" easymotion
-Plug 'easymotion/vim-easymotion'
 
 " advanced terminal
 Plug 'skywind3000/vim-terminal-help'
@@ -32,7 +32,11 @@ Plug 'mbriggs/mark.vim'
 " trailing whitespace highlight
 Plug 'bronson/vim-trailing-whitespace'
 
+" multipule line comment
+Plug 'scrooloose/nerdcommenter'
+
 " color scheme
+Plug 'liuchengxu/space-vim-theme'
 Plug 'altercation/vim-colors-solarized'
 Plug 'crusoexia/vim-monokai'
 Plug 'flazz/vim-colorschemes'         " vim colorschemes
@@ -44,7 +48,7 @@ Plug 'vim-scripts/drawit'
 call plug#end()
 
 
-" Customize
+" Customize Start From Here
 
 " basic
 set nocompatible
@@ -135,7 +139,7 @@ nmap <silent> <leader>lf :Clap files<CR>
 let g:vista_default_executive = 'coc'
 let g:vista_echo_cursor_strategy = 'both'
 
-" vim-airline
+" vim-airline, use <leader> n to swith to the n-th tab
 let g:airline_theme='deus'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#coc#enabled = 1
@@ -167,5 +171,25 @@ let g:terminal_kill="term"
 let g:terminal_close=1
 tnoremap <m-q> <c-\><c-n>
 
-colorscheme monokai
+" nerdcommenter
+"add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" python add one more space automatically
+au FileType python let g:NERDSpaceDelims = 0
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+" Add your own custom formats or override the defaults
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
+
+colorscheme space_vim_theme
 hi Comment guifg=#5C6370 ctermfg=59

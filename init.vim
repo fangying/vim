@@ -31,7 +31,6 @@ Plug 'mbriggs/mark.vim'
 
 " trailing whitespace highlight
 Plug 'bronson/vim-trailing-whitespace'
-
 " multipule line comment
 Plug 'scrooloose/nerdcommenter'
 
@@ -59,7 +58,7 @@ set nocompatible
 set paste
 set softtabstop=4
 set shiftwidth=4
-set tabstop=8
+set tabstop=4
 set noexpandtab
 set hls
 set encoding=utf-8
@@ -112,10 +111,10 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>ld <Plug>(coc-definition)
-nmap <silent> <leader>lt <Plug>(coc-type-definition)
-nmap <silent> <leader>li <Plug>(coc-implementation)
-nmap <silent> <leader>lr <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 nmap <leader>ln <Plug>(coc-rename)
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -136,8 +135,8 @@ vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(
 vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 " vim-clap
-nmap <silent> <leader>ls :Clap coc_symbols<CR>
-nmap <silent> <leader>lf :Clap files<CR>
+nmap <silent> <leader>fg :Clap coc_symbols<CR>
+nmap <silent> <leader>ff :Clap files<CR>
 
 " vim-vista
 let g:vista_default_executive = 'coc'
@@ -155,18 +154,18 @@ let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline#extensions#tabline#fnametruncate = 16
 let g:airline#extensions#tabline#fnamecollapse = 2
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <leader>0 <Plug>AirlineSelectTab0
-nmap <leader>- <Plug>AirlineSelectPrevTab
-nmap <leader>+ <Plug>AirlineSelectNextTab
+nmap <M-1> <Plug>AirlineSelectTab1
+nmap <M-2> <Plug>AirlineSelectTab2
+nmap <M-3> <Plug>AirlineSelectTab3
+nmap <M-4> <Plug>AirlineSelectTab4
+nmap <M-5> <Plug>AirlineSelectTab5
+nmap <M-6> <Plug>AirlineSelectTab6
+nmap <M-7> <Plug>AirlineSelectTab7
+nmap <M-8> <Plug>AirlineSelectTab8
+nmap <M-9> <Plug>AirlineSelectTab9
+nmap <M-0> <Plug>AirlineSelectTab0
+nmap ]b <Plug>AirlineSelectPrevTab
+nmap [b <Plug>AirlineSelectNextTab
 
 " vim-terminal-help
 let g:terminal_cwd=2
@@ -209,8 +208,9 @@ let g:NERDTreeHidden=0     " do not show hidden file
 ""Making it prettier
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-nnoremap <F3> :NERDTreeToggle<CR> " Shortcut for nerdtree
+nnoremap <leader>e :NERDTreeToggle<CR> " Shortcut for nerdtree
 
 " space-vim-theme
 colorscheme space_vim_theme
+
 hi Comment guifg=#5C6370 ctermfg=59

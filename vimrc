@@ -1,157 +1,224 @@
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-json'
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'Yggdroot/LeaderF', { 'do': '.\install.sh' }
-Plug 'Lokaltog/vim-easymotion'
-Plug 'junegunn/vim-easy-align'
+" fuzzy finder
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+Plug 'vn-ki/coc-clap'
 
-Plug 'vim-scripts/DrawIt'
-Plug 'mbriggs/mark.vim'
-Plug 'tpope/vim-unimpaired'
+" symbol search & viewer
+Plug 'liuchengxu/vista.vim'
+
+" easymotion
+Plug 'easymotion/vim-easymotion'
+
+" status bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" advanced terminal
+Plug 'skywind3000/vim-terminal-help'
+
+" git support
+Plug 'tpope/vim-fugitive'
+
+" show indent line
 Plug 'Yggdroot/indentLine'
 
-" YCM
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer',  'for': ['c', 'cpp', 'rust'] }
-let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+" word marks
+Plug 'mbriggs/mark.vim'
 
+" trailing whitespace highlight
+Plug 'bronson/vim-trailing-whitespace'
 
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'fatih/vim-go'
-Plug 'jnwhiteh/vim-golang'
-Plug 'rust-lang/rust.vim'
-Plug 'pangloss/vim-javascript'
+" multipule line comment
+Plug 'scrooloose/nerdcommenter'
 
-" color
-"Plug 'sunuslee/vim-plugin-random-colorscheme-picker'
+" nerdtree
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" color scheme
+Plug 'liuchengxu/space-vim-theme'
 Plug 'altercation/vim-colors-solarized'
 Plug 'crusoexia/vim-monokai'
 Plug 'flazz/vim-colorschemes'         " vim colorschemes
 Plug 'rafi/awesome-vim-colorschemes'  " vim colorschemes
 Plug 'lifepillar/vim-solarized8'      " solarized8
 
-" gtags and gnu global support
-Plug 'vim-scripts/gtags.vim'
-Plug 'vim-scripts/autopreview'
-Plug 'vim-scripts/genutils'
-
-Plug 'skywind3000/vim-preview'
-"P 预览 大p关闭
-autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
-autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
-noremap <Leader>u :PreviewScroll -1<cr>         " 往上滚动预览窗口
-noremap <leader>d :PreviewScroll +1<cr>         " 往下滚动预览窗口
-
-" latex support
-Plug 'lervag/vimtex'
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
+Plug 'vim-scripts/drawit'
 
 call plug#end()
 
-" no clear screen when exit vim
-set t_ti= t_te=
-let g:gutentags_add_default_project_roots = 0
-" gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归 "
-let g:gutentags_project_root = ['.root', '.git', '.svn', '.hg', '.project']
-" 所生成的数据文件的名称
-let g:gutentags_ctags_tagfile = '.tags'
-let s:vim_tags = expand('~/.cache/tags')
-let g:gutentags_cache_dir = s:vim_tags
 
-if isdirectory("kernel/") && isdirectory("mm/")
-    let g:gutentags_file_list_command = 'find arch/arm* arch/riscv arch/x86 block crypto drivers fs include init ipc kernel lib mm net security sound virt'
-endif
+" Customize Start From Here
 
-
-set tags=./.tags;.tags
-let g:gutentags_ctags_tagfile = '.tags'
-let g:gutentags_modules = []
-set cscopeprg='gtags-cscope'
-let $GTAGSLABEL = 'native'
-let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
-if executable('ctags')
-        let g:gutentags_modules += ['ctags']
-endif
-if executable('gtags-cscope') && executable('gtags')
-        let g:gutentags_modules += ['gtags_cscope']
-endif
-
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-
-let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
-let g:gutentags_auto_add_gtags_cscope = 0
-let g:gutentags_plus_switch = 1
-let g:asyncrun_bell = 1
-let g:gutentags_define_advanced_commands = 1
-let g:gutentags_generate_on_empty_buffer = 1    " open database
-
-noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
-noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
-noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
-noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
-noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
-noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
-noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
-
-
-" set F5, F6 to find function and symbol
-nnoremap <F5> :GscopeFind gs
-nnoremap <F9> :GscopeFind gg
-nnoremap <F4> :ccl <CR>
-nnoremap <F2> :let g:gutentags_trace = 1 <CR>
-nnoremap <F3> :let g:gutentags_trace = 0 <CR>
-nnoremap <F7> :GutentagsUpdate <CR>
-
-" move cursor in insert mode
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-
-" LeaderF configuration 
-" search word under cursor, the pattern is treated as regex, and enter normal
-" mode directly
-noremap <C-P> :<C-U><C-R>=printf("Leaderf rg -e %s ", expand("<cword>"))<CR>
-highlight Lf_hl_rgHighlight guifg=#000000 guibg=#CCCC66 ctermfg=green ctermbg=185
-highlight Lf_hl_match gui=bold guifg=Blue cterm=bold ctermfg=green
-highlight Lf_hl_match0 gui=bold guifg=Blue cterm=bold ctermfg=green
-highlight Lf_hl_match1 gui=bold guifg=Blue cterm=bold ctermfg=green
-highlight Lf_hl_match2 gui=bold guifg=Blue cterm=bold ctermfg=green
-highlight Lf_hl_match3 gui=bold guifg=Blue cterm=bold ctermfg=green
-highlight Lf_hl_match4 gui=bold guifg=Blue cterm=bold ctermfg=green
-highlight Lf_hl_matchRefine  gui=bold guifg=Magenta cterm=bold ctermfg=green
-
-" Customize
- set t_Co=256
+" basic
+set nocompatible
 set paste
-set cursorline
-set incsearch                 " real time search
-set background=dark
-set nocompatible              " be iMproved, required
-set backspace=indent,eol,start
-set listchars=tab:>-,trail:-
-if exists('&colorcolumn')
-    set colorcolumn=80
-endif
-set hls
-"" set expandtab
-set encoding=utf-8
-
-" Put your non-Plug stuff after this line
-set tabstop=4
 set softtabstop=4
-set shiftwidth=4
+set shiftwidth=8
+set tabstop=4
+set noexpandtab
+set hls
+set encoding=utf-8
+set listchars=tab:>-,trail:-
+set cursorline
+set incsearch
+set hidden
+set nu
+set nobackup
+set nowritebackup
+set cmdheight=2
+set laststatus=2
+set background=dark
+set colorcolumn=80
+"set termguicolors
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+syntax on
+filetype plugin indent on
+let mapleader="\<space>"
 
-color flattown
-color PaperColor
+" use [<Space> ]<Space> to insert blank line
+function! s:BlankUp(count) abort
+  put!=repeat(nr2char(10), a:count)
+  ']+1
+endfunction
+function! s:BlankDown(count) abort
+  put =repeat(nr2char(10), a:count)
+  '[-1
+endfunction
+nnoremap <silent> [<Space> :<C-U>call <SID>BlankUp(1)<CR>
+nnoremap <silent> ]<Space> :<C-U>call <SID>BlankDown(1)<CR>
+
+
+" Plugins Customized
+
+" coc.vim
+set updatetime=300
+set shortmess+=c
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <S-Space> coc#refresh()
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>ln <Plug>(coc-rename)
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+autocmd CursorHold * silent call CocActionAsync('highlight')
+nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+
+" vim-clap
+nmap <silent> <leader>fg :Clap coc_symbols<CR>
+nmap <silent> <leader>ff :Clap files<CR>
+
+" vim-vista
+let g:vista_default_executive = 'coc'
+let g:vista_echo_cursor_strategy = 'both'
+
+" vim-airline, use <leader> n to swith to the n-th tab
+let g:airline_theme='deus'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#buffer_nr_show = 0
+let g:airline#extensions#tabline#fnametruncate = 16
+let g:airline#extensions#tabline#fnamecollapse = 2
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <M-1> <Plug>AirlineSelectTab1
+nmap <M-2> <Plug>AirlineSelectTab2
+nmap <M-3> <Plug>AirlineSelectTab3
+nmap <M-4> <Plug>AirlineSelectTab4
+nmap <M-5> <Plug>AirlineSelectTab5
+nmap <M-6> <Plug>AirlineSelectTab6
+nmap <M-7> <Plug>AirlineSelectTab7
+nmap <M-8> <Plug>AirlineSelectTab8
+nmap <M-9> <Plug>AirlineSelectTab9
+nmap <M-0> <Plug>AirlineSelectTab0
+nmap ]b <Plug>AirlineSelectPrevTab
+nmap [b <Plug>AirlineSelectNextTab
+
+" vim-terminal-help
+let g:terminal_cwd=2
+let g:terminal_height=20
+let g:terminal_kill="term"
+let g:terminal_close=1
+tnoremap <m-q> <c-\><c-n>
+
+" nerdcommenter
+"add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" python add one more space automatically
+au FileType python let g:NERDSpaceDelims = 0
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+" Add your own custom formats or override the defaults
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
+
+" nerdtree
+" autocmd vimenter * NERDTree  " Auto launch nerdtree
+let g:NERDTreeWinSize = 25 " setting nerdtree window size
+let NERDTreeShowBookmarks=1  " show bookmarks when nerdtree is enabled
+" autocmd vimenter * if !argc()|NERDTree|endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+let NERDTreeIgnore = ['\.pyc$']  " filter '.pyc' file
+let g:NERDTreeShowLineNumbers=0 " show line number
+let g:NERDTreeHidden=0     " do not show hidden file
+""Making it prettier
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+nnoremap <leader>e :NERDTreeToggle<CR> " Shortcut for nerdtree
+
+" space-vim-theme
+colorscheme space_vim_theme
+hi Comment guifg=#5C6370 ctermfg=59
+set nofixendofline
+
